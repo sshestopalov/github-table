@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 export const RepositoriesContainer = () => {
   const classes = useStyles();
   const [query, setQuery] = useState('language:javascript stars:>=1000');
-  const [prevCursor, setPrevCursor] = useState<string | null | undefined>(null);
 
   const { data, loading, error, fetchMore } = useQuery<SearchRepositoriesQuery>(
     SEARCH_REPOSITORIES,
@@ -64,12 +63,6 @@ export const RepositoriesContainer = () => {
   const onFetchMore = useCallback(() => {
     const hasNextPage = pageInfo?.hasNextPage;
     const cursor = pageInfo?.endCursor;
-
-    if (cursor === prevCursor) {
-      return;
-    }
-
-    setPrevCursor(cursor);
 
     if (hasNextPage && !loading) {
       fetchMore({
@@ -92,7 +85,7 @@ export const RepositoriesContainer = () => {
         },
       });
     }
-  }, [pageInfo, loading, fetchMore, prevCursor]);
+  }, [pageInfo, loading, fetchMore]);
 
   if (error) {
     return <div>Error: {error && error.message}</div>;
