@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from 'react';
 
 export type Props = React.PropsWithChildren<{
   onFetchMore: () => void;
@@ -10,7 +10,7 @@ export const InfiniteScroll = ({ children, onFetchMore }: Props) => {
   useEffect(() => {
     const options = {
       root: null,
-      rootMargin: "20px",
+      rootMargin: '20px',
       threshold: 1.0,
     };
 
