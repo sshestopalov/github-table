@@ -1,25 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { RepositoriesContainer } from './pages/Repositories/RepositoriesContainer';
+
+import { createApolloClient } from './graphql/client';
+
+const authToken = process.env.REACT_APP_AUTH_TOKEN;
+
+const client = createApolloClient(authToken);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <RepositoriesContainer />
+    </ApolloProvider>
   );
 }
 
